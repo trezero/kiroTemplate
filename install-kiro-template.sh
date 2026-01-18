@@ -121,6 +121,7 @@ echo "   cd $TARGET_DIR"
 echo
 echo "2. Start Kiro CLI and run the setup agent:"
 echo "   kiro-cli --agent kiro-setup"
+echo "   > Set up this project"
 echo
 echo "3. The setup agent will:"
 echo "   • Auto-detect your technology stack"
