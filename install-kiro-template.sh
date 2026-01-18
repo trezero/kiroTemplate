@@ -60,8 +60,8 @@ if [ ! -d "$TARGET_DIR" ]; then
     mkdir -p "$TARGET_DIR"
 fi
 
-# Check if target already has .kiro or .kiroTemplate
-if [ -d "$TARGET_DIR/.kiro" ] || [ -d "$TARGET_DIR/.kiroTemplate" ]; then
+# Check if target already has .kiro
+if [ -d "$TARGET_DIR/.kiro" ]; then
     print_warning "Target directory already has Kiro CLI configuration"
     read -p "Do you want to overwrite it? (y/N): " -n 1 -r
     echo
@@ -69,33 +69,32 @@ if [ -d "$TARGET_DIR/.kiro" ] || [ -d "$TARGET_DIR/.kiroTemplate" ]; then
         print_status "Installation cancelled"
         exit 0
     fi
-    rm -rf "$TARGET_DIR/.kiro" "$TARGET_DIR/.kiroTemplate"
+    rm -rf "$TARGET_DIR/.kiro"
 fi
 
 print_status "Installing Kiro CLI template to $TARGET_DIR"
 
-# Copy template files (excluding .git and install script)
-rsync -av --exclude='.git' --exclude='install-kiro-template.sh' --exclude='README.md' --exclude='kiroInit.py' "$TEMPLATE_DIR/" "$TARGET_DIR/.kiroTemplate/"
+# Copy template files directly to .kiro folder
+rsync -av --exclude='.git' --exclude='install-kiro-template.sh' --exclude='README.md' --exclude='kiroInit.py' "$TEMPLATE_DIR/" "$TARGET_DIR/.kiro/"
+print_success "Template installed to .kiro folder"
 
-# Also create .kiro symlink so agent can be found immediately
-ln -sf .kiroTemplate "$TARGET_DIR/.kiro"
-print_success "Template copied and .kiro symlink created"
-
-# Update .gitignore to exclude .kiroTemplate
+# Update .gitignore to exclude .kiro (but keep steering docs)
 GITIGNORE_FILE="$TARGET_DIR/.gitignore"
 if [ -f "$GITIGNORE_FILE" ]; then
-    if ! grep -q "^\.kiroTemplate" "$GITIGNORE_FILE"; then
+    if ! grep -q "^\.kiro/\*" "$GITIGNORE_FILE"; then
         echo "" >> "$GITIGNORE_FILE"
-        echo "# Kiro CLI Template (remove after initialization)" >> "$GITIGNORE_FILE"
-        echo ".kiroTemplate" >> "$GITIGNORE_FILE"
-        print_success "Added .kiroTemplate to .gitignore"
+        echo "# Kiro CLI (exclude most but keep steering docs)" >> "$GITIGNORE_FILE"
+        echo ".kiro/*" >> "$GITIGNORE_FILE"
+        echo "!.kiro/steering/" >> "$GITIGNORE_FILE"
+        print_success "Added .kiro to .gitignore"
     else
-        print_status ".kiroTemplate already in .gitignore"
+        print_status ".kiro already in .gitignore"
     fi
 else
-    print_status "Creating .gitignore with .kiroTemplate entry"
-    echo "# Kiro CLI Template (remove after initialization)" > "$GITIGNORE_FILE"
-    echo ".kiroTemplate" >> "$GITIGNORE_FILE"
+    print_status "Creating .gitignore with .kiro entry"
+    echo "# Kiro CLI (exclude most but keep steering docs)" > "$GITIGNORE_FILE"
+    echo ".kiro/*" >> "$GITIGNORE_FILE"
+    echo "!.kiro/steering/" >> "$GITIGNORE_FILE"
 fi
 
 # Make initialization script executable
@@ -128,6 +127,6 @@ echo "   • Auto-detect your technology stack"
 echo "   • Ask only for confirmation and missing details"
 echo "   • Configure specialized agents for your project"
 echo "   • Set up MCP servers and workflows"
-echo "   • Rename .kiroTemplate to .kiro when complete"
+echo "   • Update all configuration in place"
 echo
 print_status "The intelligent setup will make configuration effortless! 🎯"
