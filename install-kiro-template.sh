@@ -76,7 +76,10 @@ print_status "Installing Kiro CLI template to $TARGET_DIR"
 
 # Copy template files (excluding .git and install script)
 rsync -av --exclude='.git' --exclude='install-kiro-template.sh' --exclude='README.md' --exclude='kiroInit.py' "$TEMPLATE_DIR/" "$TARGET_DIR/.kiroTemplate/"
-print_success "Template copied successfully"
+
+# Also create .kiro symlink so agent can be found immediately
+ln -sf .kiroTemplate "$TARGET_DIR/.kiro"
+print_success "Template copied and .kiro symlink created"
 
 # Update .gitignore to exclude .kiroTemplate
 GITIGNORE_FILE="$TARGET_DIR/.gitignore"
