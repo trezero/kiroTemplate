@@ -32,14 +32,27 @@ print_error() {
 # Determine target directory
 if [ $# -eq 0 ]; then
     print_status "No target directory provided"
-    echo "Options:"
-    echo "1. Install in current directory ($(pwd))"
-    echo "2. Specify a different directory"
+    
+    # Check if we're in a temp directory and suggest parent instead
+    CURRENT_DIR="$(pwd)"
+    if [[ "$(basename "$CURRENT_DIR")" == "temp" ]]; then
+        SUGGESTED_DIR="$(dirname "$CURRENT_DIR")"
+        print_status "Detected temp directory installation"
+        echo "Options:"
+        echo "1. Install in project directory ($SUGGESTED_DIR)"
+        echo "2. Specify a different directory"
+    else
+        SUGGESTED_DIR="$CURRENT_DIR"
+        echo "Options:"
+        echo "1. Install in current directory ($SUGGESTED_DIR)"
+        echo "2. Specify a different directory"
+    fi
+    
     read -p "Choose option (1/2): " -n 1 -r
     echo
     
     if [[ $REPLY == "1" ]]; then
-        TARGET_DIR="$(pwd)"
+        TARGET_DIR="$SUGGESTED_DIR"
     else
         read -p "Enter target directory path: " TARGET_DIR
     fi
