@@ -98,7 +98,7 @@ else
 fi
 
 # Make initialization script executable
-chmod +x "$TARGET_DIR/.kiroTemplate/agents/kiro-setup.json"
+chmod +x "$TARGET_DIR/.kiro/agents/kiro-setup.json"
 print_success "Setup agent configured"
 
 # Check Python availability
