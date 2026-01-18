@@ -31,30 +31,14 @@ print_error() {
 
 # Determine target directory
 if [ $# -eq 0 ]; then
-    print_status "No target directory provided"
-    
     # Check if we're in a temp directory and suggest parent instead
     CURRENT_DIR="$(pwd)"
     if [[ "$(basename "$CURRENT_DIR")" == "temp" ]]; then
-        SUGGESTED_DIR="$(dirname "$CURRENT_DIR")"
-        print_status "Detected temp directory installation"
-        echo "Options:"
-        echo "1. Install in project directory ($SUGGESTED_DIR)"
-        echo "2. Specify a different directory"
+        TARGET_DIR="$(dirname "$CURRENT_DIR")"
+        print_status "Detected temp directory - installing to project directory: $TARGET_DIR"
     else
-        SUGGESTED_DIR="$CURRENT_DIR"
-        echo "Options:"
-        echo "1. Install in current directory ($SUGGESTED_DIR)"
-        echo "2. Specify a different directory"
-    fi
-    
-    read -p "Choose option (1/2): " -n 1 -r
-    echo
-    
-    if [[ $REPLY == "1" ]]; then
-        TARGET_DIR="$SUGGESTED_DIR"
-    else
-        read -p "Enter target directory path: " TARGET_DIR
+        TARGET_DIR="$CURRENT_DIR"
+        print_status "Installing to current directory: $TARGET_DIR"
     fi
 else
     TARGET_DIR="$1"
@@ -64,7 +48,7 @@ SCRIPT_DIR="$(dirname "$0")"
 TEMPLATE_DIR="$SCRIPT_DIR"
 
 # Check if template directory exists
-if [ ! -f "$TEMPLATE_DIR/kiroInit.py" ]; then
+if [ ! -f "$TEMPLATE_DIR/agents/kiro-setup.json" ]; then
     print_error "Template files not found in $TEMPLATE_DIR"
     print_error "Make sure you're running this from the kiro-cli-template repository"
     exit 1
@@ -91,7 +75,7 @@ fi
 print_status "Installing Kiro CLI template to $TARGET_DIR"
 
 # Copy template files (excluding .git and install script)
-rsync -av --exclude='.git' --exclude='install-kiro-template.sh' --exclude='README.md' "$TEMPLATE_DIR/" "$TARGET_DIR/.kiroTemplate/"
+rsync -av --exclude='.git' --exclude='install-kiro-template.sh' --exclude='README.md' --exclude='kiroInit.py' "$TEMPLATE_DIR/" "$TARGET_DIR/.kiroTemplate/"
 print_success "Template copied successfully"
 
 # Update .gitignore to exclude .kiroTemplate
@@ -112,8 +96,8 @@ else
 fi
 
 # Make initialization script executable
-chmod +x "$TARGET_DIR/.kiroTemplate/kiroInit.py"
-print_success "Initialization script made executable"
+chmod +x "$TARGET_DIR/.kiroTemplate/agents/kiro-setup.json"
+print_success "Setup agent configured"
 
 # Check Python availability
 if command -v python3 &> /dev/null; then
@@ -121,30 +105,26 @@ if command -v python3 &> /dev/null; then
 elif command -v python &> /dev/null; then
     PYTHON_CMD="python"
 else
-    print_warning "Python not found. Please install Python 3.6+ to run the initialization script"
+    print_warning "Python not found. You'll need Python 3.6+ to run advanced features"
     PYTHON_CMD="python3"
 fi
 
 print_success "Kiro CLI template installed successfully!"
 echo
-print_status "Next steps:"
+print_status "🚀 Ready to configure your project!"
+echo
+echo "Next steps:"
 echo "1. Navigate to your project directory:"
 echo "   cd $TARGET_DIR"
 echo
-echo "2. Run the initialization script:"
-echo "   cd .kiroTemplate"
-echo "   $PYTHON_CMD kiroInit.py"
+echo "2. Start Kiro CLI and run the setup agent:"
+echo "   kiro-cli --agent kiro-setup"
 echo
-echo "3. Follow the interactive prompts to configure your project"
+echo "3. The setup agent will:"
+echo "   • Auto-detect your technology stack"
+echo "   • Ask only for confirmation and missing details"
+echo "   • Configure specialized agents for your project"
+echo "   • Set up MCP servers and workflows"
+echo "   • Rename .kiroTemplate to .kiro when complete"
 echo
-echo "4. Start using Kiro CLI:"
-echo "   kiro-cli"
-echo
-print_status "The initialization script will:"
-echo "  • Customize steering documents for your project"
-echo "  • Configure specialized agents based on your tech stack"
-echo "  • Set up MCP servers for enhanced capabilities"
-echo "  • Create project-specific workflows and patterns"
-echo "  • Rename .kiroTemplate to .kiro when complete"
-echo
-print_success "Happy coding with AI assistance! 🚀"
+print_status "The intelligent setup will make configuration effortless! 🎯"

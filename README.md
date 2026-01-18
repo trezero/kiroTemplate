@@ -6,21 +6,24 @@ This template provides a comprehensive Kiro CLI setup for new projects with spec
 
 1. **Copy template to your new project:**
    ```bash
-   cp -r .kiroTemplate /path/to/your/new/project/
-   cd /path/to/your/new/project/.kiroTemplate
+   git clone https://github.com/trezero/kiroTemplate.git temp
+   cd temp
+   ./install-kiro-template.sh
+   cd ..
+   rm -rf temp
    ```
 
-2. **Run initialization script:**
+2. **Run intelligent setup:**
    ```bash
-   python3 kiroInit.py
+   kiro-cli --agent kiro-setup
    ```
 
-3. **Follow the interactive prompts** to configure your project
-
-4. **Start Kiro CLI:**
+3. **Start developing:**
    ```bash
    kiro-cli
    ```
+
+The setup agent will auto-detect your technology stack and only ask for confirmation!
 
 ## What's Included
 
