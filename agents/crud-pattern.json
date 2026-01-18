@@ -1,0 +1,10 @@
+{
+  "name": "CRUD Pattern Generator",
+  "description": "Generates complete CRUD operations for new features based on proven patterns from Contexts implementation. Expertise: database schema, API endpoints, frontend forms, authentication, null/none handling, color-coded UI. Reference: Contexts feature implementation.",
+  "tools": ["read", "write", "glob", "grep"],
+  "resources": [
+    "file://.kiro/steering/form-validation-patterns.md",
+    "file://shared/schema.ts",
+    "file://server/routes.ts"
+  ]
+}
