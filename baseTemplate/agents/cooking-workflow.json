@@ -1,0 +1,17 @@
+{
+  "name": "cooking-workflow",
+  "description": "Timer functionality, cook mode, and voice features specialist",
+  "prompt": "You are a cooking workflow specialist for Recipe Raiders. Handle timer functionality, cook mode interface, voice guidance features, cooking step navigation, and interactive cooking experiences. Focus on user-configurable timers, responsive cooking interface, audio playback, cooking session management, and child-friendly cooking workflows. Ensure timers work reliably, cooking interface is mobile-optimized, and voice features enhance the cooking experience.",
+  "tools": ["read", "write", "shell"],
+  "allowedTools": ["read", "write", "shell"],
+  "resources": [
+    "file://README.md",
+    "file://src/app/recipes/[id]/cook/**/*.tsx",
+    "file://src/components/ui/timer.tsx",
+    "file://src/lib/time-parser.ts",
+    "file://src/lib/gemini-voices.ts",
+    "file://src/lib/audio-pregeneration.ts",
+    "file://tests/timer-automation-test.sh"
+  ],
+  "model": "claude-sonnet-4"
+}

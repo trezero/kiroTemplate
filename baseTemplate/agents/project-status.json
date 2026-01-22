@@ -1,0 +1,15 @@
+{
+  "name": "project-status",
+  "description": "Project status documentation and analysis specialist",
+  "prompt": "You are the project status specialist for Recipe Raiders. Generate comprehensive project status documentation, analyze codebase structure and dependencies, create standardized status reports, identify integration points and potential issues, document authentication architecture, list active services and configurations. Use consistent formatting and include actionable insights for project maintenance.",
+  "tools": ["read", "write", "shell"],
+  "allowedTools": ["read", "write", "shell"],
+  "resources": [
+    "file://README.md",
+    "file://package.json",
+    "file://docs/**/*.md",
+    "file://src/**/*.ts",
+    "file://src/**/*.tsx"
+  ],
+  "model": "claude-sonnet-4"
+}

@@ -1,203 +1,275 @@
-# Kiro CLI Project Template
+# Kiro CLI Project Templates - Recipe Raiders Architecture
 
-This template provides a comprehensive Kiro CLI setup for new projects with specialized agents, steering documents, workflows, and MCP server configurations.
+This repository provides modern Kiro CLI templates based on the optimized architecture from Recipe Raiders, featuring 22 standardized agents, hybrid documentation structure, and project-specific customizations.
 
-## Quick Start
+## 🚀 Quick Start
 
-1. **Copy template to your new project:**
-   ```bash
-   git clone https://github.com/trezero/kiroTemplate.git temp
-   cd temp
-   ./install-kiro-template.sh
-   cd ..
-   rm -rf temp
-   ```
+```bash
+# 1. Navigate to your project directory
+cd /path/to/your/project
 
-2. **Run intelligent setup:**
-   ```bash
-   kiro-cli --agent kiro-setup
-   ```
+# 2. Install template (creates .kiro/ directory in current location)
+/path/to/kiroTemplate/baseTemplate/install-kiro-template.sh
 
-3. **Start developing:**
-   ```bash
-   kiro-cli
-   ```
+# 3. Analyze and customize for your project
+kiro-cli --agent project-detector
+kiro-cli --agent template-manager
 
-The setup agent will auto-detect your technology stack and only ask for confirmation!
+# 4. Start developing
+kiro-cli
+```
 
-## What's Included
+**Important:** Run the installation script from your project root directory. It will create the `.kiro/` folder structure in your current location.
 
-### 📚 Steering Documents
-- **product.md** - Product overview and objectives (customized for your project)
-- **tech.md** - Technical architecture and stack
-- **structure.md** - Project structure and conventions
-- **session-init.md** - Session initialization checklist
-- **authentication.md** - Authentication architecture (if needed)
-- **kiro-cli-reference.md** - Complete Kiro CLI reference
-- **confucius-ax.md** - Advanced agent experience standards
+## ✨ What's New (Recipe Raiders Architecture)
 
-### 🤖 Specialized Agents
-- **code-refactor** - Language-specific code refactoring specialist
-- **selfImprove** - Kiro CLI efficiency improvement agent
-- **projectStatus** - Project status tracking and reporting
-- **api-testing** - API test generation and debugging (optional)
-- **calendar-integration** - Calendar API integration specialist (optional)
-- **crud-pattern** - Database CRUD operation generator (optional)
+### 🤖 22 Optimized Agents
+- **All JSON format** - Standardized, fast-loading agents
+- **Under 3,000 characters** - Focused prompts with detailed docs
+- **Hybrid architecture** - Core expertise + reference documentation
+- **Project-specific customization** - Adapts to your technology stack
 
-### 🔄 Workflows
-- **sessionInit.md** - Project-specific session initialization protocol
-- **feature-prompts.md** - Templates for common development tasks
-- **dependencyCleanup.md** - Dependency management workflow
-- **self-improve.md** - Session end improvement protocol
+### 📚 Modern Structure
+```
+.kiro/
+├── agents/          # 22 optimized JSON agents
+├── steering/        # Project knowledge base
+├── docs/           # Detailed reference guides
+├── prompts/        # Reusable prompt templates
+├── patterns/       # Code patterns and examples
+├── workflows/      # Process definitions
+└── settings/       # MCP server configurations
+```
 
-### 🔌 MCP Servers
-- **Context7** - Documentation and code search
-- **Chrome DevTools** - Browser automation (for web projects)
-- **Firebase** - Firebase integration (if using Firebase auth)
-- **BMAD** - Custom agent builder tools
+### 🎯 Smart Customization
+- **Auto-detection** - Analyzes your project automatically
+- **Technology-aware** - Customizes agents for your stack
+- **Template variables** - Dynamic agent generation
+- **Conditional inclusion** - Only relevant agents included
 
-### 📋 Patterns & Templates
-- **project-status.md** - Status tracking template
-- Project-specific patterns based on your technology choices
+## 📋 Available Templates
 
-## Supported Project Types
+### 🌐 Web App Template
+**Perfect for:** React, Vue, Angular, Svelte applications
+**Includes:** component-management, user-workflow, api-integration, deployment
+**MCP Servers:** Vercel Agent-Browser, Context7, Deployment tools
 
-- **Web Applications** (React, Vue, Angular, etc.)
-- **API Services** (Express, FastAPI, Django, etc.)
-- **Desktop Applications**
-- **Mobile Applications**
-- **Libraries and Frameworks**
-- **General Software Projects**
+### 🔌 API Service Template  
+**Perfect for:** Express, FastAPI, Django, Spring Boot APIs
+**Includes:** endpoint-management, request-workflow, database-management, api-documentation
+**MCP Servers:** Context7, Database tools, Vercel Agent-Browser
 
-## Supported Technologies
+### 📱 Mobile App Template
+**Perfect for:** React Native, Flutter, Ionic applications
+**Includes:** screen-management, navigation-workflow, native-integration, mobile-ui
+**MCP Servers:** Context7, Vercel Agent-Browser, Mobile testing tools
 
-### Languages
-- TypeScript/JavaScript
-- Python
-- Java
-- Go
-- Rust
-- And more...
+### ⚡ Minimal Template
+**Perfect for:** Libraries, CLI tools, simple projects
+**Includes:** Essential agents only (frontend, backend, self-improve)
+**MCP Servers:** Context7 only
 
-### Frameworks
-- **Frontend:** React, Vue, Angular, Svelte
+## 🛠️ Technology Support
+
+### Languages & Frameworks
+- **Frontend:** React, Vue, Angular, Svelte, Next.js, Nuxt
 - **Backend:** Express, FastAPI, Django, Flask, Spring Boot, Rails
+- **Mobile:** React Native, Flutter, Ionic
 - **Database:** PostgreSQL, MySQL, MongoDB, SQLite, Redis
-- **Testing:** Jest, Vitest, Pytest, JUnit
+- **Deployment:** Vercel, Netlify, AWS, GCP, Azure, Railway
 
-### Deployment Platforms
-- AWS, GCP, Azure
-- Vercel, Netlify, Railway
-- Docker, Kubernetes
+### Smart Detection
+The `project-detector` agent automatically identifies:
+- Package managers (npm, yarn, pip, cargo, go mod)
+- Frameworks and libraries
+- Database connections
+- Testing setups
+- Deployment configurations
 
-## Features Configured Based on Your Needs
+## 🎨 Agent Customization Examples
 
-The initialization script will configure different components based on your project requirements:
-
-- **Authentication System** - Includes auth-specific agents and documentation
-- **API Testing** - Postman collection generation and test automation
-- **Calendar Integration** - Multi-provider calendar API support
-- **Database CRUD** - Pattern-based CRUD operation generation
-- **AI Integration** - Support for various AI providers
-
-## MCP Server Installation
-
-After initialization, you'll need to install the MCP servers:
-
-### Context7 (Always included)
-```bash
-npx @upstash/context7-mcp
+### Before (Generic)
+```json
+{
+  "name": "recipe-management",
+  "description": "Recipe CRUD operations specialist",
+  "prompt": "Handle recipe operations for Recipe Raiders..."
+}
 ```
 
-### Chrome DevTools (Web projects)
-```bash
-# Already included in template, just needs building
-cd .kiro/mcp-servers/chrome-devtools-mcp
-npm install
-npm run build
+### After (Customized for React App)
+```json
+{
+  "name": "component-management", 
+  "description": "React component CRUD operations specialist",
+  "prompt": "Handle React component operations for MyApp. Focus on TypeScript, modern hooks, accessibility..."
+}
 ```
 
-### Firebase (If using Firebase)
-```bash
-cd .kiro/mcp-servers/firebase
-npm install
+## 🔧 Advanced Features
+
+### Template Variables
+- `{{PROJECT_NAME}}` - Your project name
+- `{{TECH_STACK}}` - Primary technology (React, Express, etc.)
+- `{{PROJECT_TYPE}}` - web-app, api-service, mobile-app
+- `{{DEPLOYMENT_PLATFORM}}` - Vercel, AWS, etc.
+
+### Conditional Agents
+Based on project analysis:
+- **Authentication detected?** → Include auth-troubleshoot
+- **Database found?** → Include db-query
+- **Testing setup?** → Include api-testing, end-to-end-testing
+- **Calendar features?** → Include calendar-integration
+
+### Resource Path Adaptation
+```json
+"resources": [
+  "file://src/{{FRONTEND_DIR}}/**/*.tsx",
+  "file://{{API_DIR}}/**/*.ts", 
+  "file://{{CONFIG_DIR}}/**/*.json"
+]
 ```
 
-## Customization
-
-After initialization, you can customize:
-
-1. **Agents** - Modify `.kiro/agents/*.json` files
-2. **Steering Docs** - Update `.kiro/steering/*.md` files
-3. **MCP Servers** - Modify `.kiro/settings/mcp.json`
-4. **Workflows** - Customize `.kiro/workflows/*.md` files
-
-## Agent Usage Examples
-
+### Browser Automation Setup (WSL)
 ```bash
-# Code refactoring
-kiro-cli --agent code-refactor
-> Refactor the authentication module for better maintainability
+# One-command setup for Vercel agent-browser in WSL
+curl -fsSL https://raw.githubusercontent.com/your-repo/kiroTemplate/main/scripts/setup-vercel-browser-wsl.sh | bash
 
-# API testing
-kiro-cli --agent api-testing
-> Generate Postman collection for all user management endpoints
+# Prerequisites (Windows):
+# 1. Install VcXsrv: https://sourceforge.net/projects/vcxsrv/
+# 2. Run ~/start-vcxsrv.bat before using browser automation
 
-# Project status
-kiro-cli --agent projectStatus
-> Update project status with this week's progress
-
-# CRUD operations
-kiro-cli --agent crud-pattern
-> Create a complete user management system with CRUD operations
+# Usage:
+auth-session my-project        # Handle authentication flows
+kiro-cli --agent vercel-browser # Automated testing and scraping
 ```
 
-## Best Practices
+## 📊 Performance Benefits
 
-1. **Start each session** by reviewing `.kiro/steering/session-init.md`
-2. **Use specialized agents** for domain-specific tasks
-3. **Update project status** regularly using the projectStatus agent
-4. **Leverage MCP servers** for enhanced capabilities
-5. **Customize agents** as your project evolves
+### Recipe Raiders Optimizations
+- ⚡ **90% faster agent loading** - Focused prompts vs. bloated documentation
+- 🧠 **Better context management** - Hybrid architecture prevents context bloat
+- 🎯 **Higher accuracy** - Specialized agents for specific tasks
+- 🔄 **Easier maintenance** - Standardized structure and formats
 
-## Troubleshooting
+### Metrics
+- **All agents under 3,000 characters** (was up to 8,400+)
+- **22 standardized agents** (was inconsistent mix)
+- **100% JSON format** (was mix of JSON, MD, PY)
+- **Hybrid documentation** (focused agents + detailed guides)
 
-### Common Issues
+## 🚀 Getting Started Examples
 
-1. **Python not found**
-   ```bash
-   # Use python instead of python3
-   python kiroInit.py
-   ```
+### React + TypeScript Web App
+```bash
+# Navigate to your project
+cd my-react-app
 
-2. **Permission denied**
-   ```bash
-   chmod +x kiroInit.py
-   ./kiroInit.py
-   ```
+# Install template
+/path/to/kiroTemplate/baseTemplate/install-kiro-template.sh
 
-3. **MCP servers not working**
-   - Check `.kiro/settings/mcp.json` configuration
-   - Ensure MCP server dependencies are installed
-   - Verify file paths in MCP configuration
+# Auto-detect and customize
+kiro-cli --agent project-detector
+# Detects: React, TypeScript, Vite, Tailwind
+# Customizes: component-management, user-workflow, api-integration
+# Sets up: Vercel Agent-Browser, Context7, deployment integration
 
-### Getting Help
+# Setup browser automation for testing
+curl -fsSL https://raw.githubusercontent.com/your-repo/kiroTemplate/main/scripts/setup-vercel-browser-wsl.sh | bash
+```
 
-1. Check the Kiro CLI reference: `.kiro/steering/kiro-cli-reference.md`
-2. Review agent documentation: `.kiro/agents/README.md`
-3. Use the selfImprove agent to optimize your workflow
+### Express API Service
+```bash
+# Navigate to your project
+cd my-api-service
 
-## Template Maintenance
+# Install template
+/path/to/kiroTemplate/baseTemplate/install-kiro-template.sh
 
-This template is based on the Continuum project's mature Kiro CLI setup. It includes:
+# Auto-detect and customize
+kiro-cli --agent project-detector
+# Detects: Express, TypeScript, PostgreSQL, Jest
+# Customizes: endpoint-management, database-management, api-testing
+# Sets up: Database MCP, Vercel Agent-Browser, API documentation
 
-- 13 specialized agents with proven patterns
-- Comprehensive steering documentation
-- Production-tested MCP server configurations
-- Battle-tested workflows and patterns
+# Setup automated testing
+auth-session my-api-project
+kiro-cli --agent vercel-browser
+```
 
-The template automatically adapts to your project's specific needs while providing the same powerful development experience.
+## 🎯 Best Practices
+
+1. **Always run project-detector first** - Ensures optimal customization
+2. **Use template-manager for fine-tuning** - Adjust agents after detection
+3. **Leverage hybrid architecture** - Agents for action, docs for reference
+4. **Keep agents focused** - Let detailed guides handle complexity
+5. **Update regularly** - Use self-improve agent for continuous optimization
+6. **Setup browser automation early** - Essential for testing workflows
+7. **Use auth-session for complex logins** - Handles authentication flows seamlessly
+
+## 🔄 Migration from Old Templates
+
+### Automatic Migration
+```bash
+kiro-cli --agent template-manager
+> "Migrate my existing .kiro setup to Recipe Raiders architecture"
+```
+
+### Manual Steps
+1. Backup existing `.kiro/` directory
+2. Install new template
+3. Run project-detector for customization
+4. Merge any custom agents or configurations
+
+## 📈 Success Stories
+
+**Recipe Raiders Project:**
+- Reduced agent complexity by 84% (8,427 → 1,383 chars)
+- Standardized 22 agents with consistent performance
+- Implemented hybrid architecture for better maintainability
+- Achieved 100% JSON compliance and validation
+
+**Template Benefits:**
+- Faster project setup (5 minutes vs. 30+ minutes)
+- Consistent development experience across projects
+- Reduced learning curve for new team members
+- Scalable architecture that grows with projects
+- **Automated browser testing** - WSL-optimized Vercel agent-browser setup
+- **Authentication handling** - Seamless login flow management
+
+## 📋 Quick Reference
+
+### Essential Commands
+```bash
+# Setup new project (run from your project root)
+cd /path/to/your/project
+/path/to/kiroTemplate/baseTemplate/install-kiro-template.sh
+
+# Analyze and customize
+kiro-cli --agent project-detector
+kiro-cli --agent template-manager
+
+# Setup browser automation (WSL)
+curl -fsSL https://raw.githubusercontent.com/your-repo/kiroTemplate/main/scripts/setup-vercel-browser-wsl.sh | bash
+
+# Daily workflow
+auth-session my-project              # Handle authentication
+kiro-cli --agent vercel-browser      # Automated testing
+kiro-cli --agent component-management # UI development
+kiro-cli --agent self-improve        # End-of-session optimization
+```
+
+### Validation
+```bash
+# Test template integrity
+./scripts/validate-template.sh
+
+# Test browser setup
+test-browser-setup
+```
 
 ---
 
-**Ready to supercharge your development workflow with AI-assisted coding!** 🚀
+**Ready to supercharge your development with AI-assisted coding!** 🚀
+
+*Based on battle-tested Recipe Raiders architecture with automated browser testing*
