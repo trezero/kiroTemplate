@@ -2,7 +2,7 @@
 
 ## Customized Agents for Web Applications
 
-### component-management.json (was recipe-management.json)
+### component-management.json (was resource-management.json)
 ```json
 {
   "name": "component-management",

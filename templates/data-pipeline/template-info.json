@@ -1,0 +1,8 @@
+{
+  "name": "data-pipeline",
+  "description": "Kiro CLI template for data-pipeline projects",
+  "type": "data-pipeline",
+  "baseTemplate": "baseTemplate",
+  "created": "2026-01-22T21:28:59Z",
+  "version": "1.0.0"
+}

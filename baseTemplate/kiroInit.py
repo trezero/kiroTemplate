@@ -8,6 +8,7 @@ import os
 import json
 import shutil
 import sys
+import re
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -15,6 +16,15 @@ class KiroInitializer:
     def __init__(self):
         self.template_dir = Path(__file__).parent
         self.project_info = {}
+        self.template_variables = self._load_template_variables()
+    
+    def _load_template_variables(self) -> Dict:
+        """Load template variable definitions"""
+        variables_file = self.template_dir / "template-variables.json"
+        if variables_file.exists():
+            with open(variables_file, 'r') as f:
+                return json.load(f)['variables']
+        return {}
         
     def collect_project_info(self) -> Dict:
         """Collect project information through interactive prompts"""
@@ -24,29 +34,41 @@ class KiroInitializer:
         info = {}
         
         # Basic project info
-        info['project_name'] = input("Project name: ").strip()
-        info['project_description'] = input("Project description: ").strip()
-        info['project_type'] = self._select_option(
+        info['PROJECT_NAME'] = input("Project name: ").strip()
+        info['PROJECT_DESCRIPTION'] = input("Project description: ").strip()
+        info['PROJECT_TYPE'] = self._select_option(
             "Project type:",
-            ["web-app", "api-service", "desktop-app", "mobile-app", "library", "other"]
+            ["web-app", "api-service", "desktop-app", "mobile-app", "library", "data-pipeline", "other"]
         )
+        
+        # Domain and business logic
+        info['DOMAIN'] = self._select_option(
+            "Business domain:",
+            ["general", "ecommerce", "productivity", "social", "education", "healthcare", "finance", "other"]
+        )
+        
+        # Primary resource/entity
+        info['RESOURCE_NAME'] = input("Primary resource/entity name (e.g., 'task', 'post', 'product'): ").strip() or "item"
+        info['RESOURCE_NAME_PLURAL'] = input(f"Plural form of '{info['RESOURCE_NAME']}': ").strip() or f"{info['RESOURCE_NAME']}s"
         
         # Technology stack
         print("\n📚 Technology Stack")
-        info['frontend_framework'] = self._select_option(
+        info['FRONTEND_FRAMEWORK'] = self._select_option(
             "Frontend framework:",
             ["react", "vue", "angular", "svelte", "vanilla-js", "none"]
         )
         
-        info['backend_framework'] = self._select_option(
+        info['BACKEND_FRAMEWORK'] = self._select_option(
             "Backend framework:",
             ["express", "fastapi", "django", "flask", "spring-boot", "rails", "none"]
         )
         
-        info['database'] = self._select_option(
+        info['DATABASE'] = self._select_option(
             "Database:",
-            ["postgresql", "mysql", "mongodb", "sqlite", "redis", "none"]
+            ["postgresql", "mysql", "mongodb", "sqlite", "redis", "firestore", "none"]
         )
+        
+        info['TECH_STACK'] = info['FRONTEND_FRAMEWORK'] if info['FRONTEND_FRAMEWORK'] != 'none' else info['BACKEND_FRAMEWORK']
         
         info['language'] = self._select_option(
             "Primary language:",
@@ -60,7 +82,7 @@ class KiroInitializer:
             ["jest", "vitest", "pytest", "junit", "go-test", "cargo-test", "none"]
         )
         
-        info['deployment_platform'] = self._select_option(
+        info['DEPLOYMENT_PLATFORM'] = self._select_option(
             "Deployment platform:",
             ["aws", "gcp", "azure", "vercel", "netlify", "railway", "docker", "none"]
         )
@@ -68,15 +90,46 @@ class KiroInitializer:
         # Features and integrations
         print("\n🔧 Features & Integrations")
         info['needs_auth'] = self._yes_no("Does your project need authentication?")
+        if info['needs_auth']:
+            info['AUTH_PROVIDER'] = self._select_option(
+                "Authentication provider:",
+                ["firebase", "auth0", "supabase", "custom", "none"]
+            )
+        else:
+            info['AUTH_PROVIDER'] = "none"
+            
         info['needs_api_testing'] = self._yes_no("Do you need API testing tools?")
         info['needs_calendar'] = self._yes_no("Do you need calendar integration?")
         info['needs_database_crud'] = self._yes_no("Do you need database CRUD operations?")
         
         # AI and external services
-        info['ai_provider'] = self._select_option(
+        info['AI_PROVIDER'] = self._select_option(
             "AI provider (if any):",
             ["openai", "anthropic", "google-gemini", "ollama", "none"]
         )
+        
+        # Environment setup
+        print("\n🌍 Environment Configuration")
+        info['DEV_ENV'] = input("Development environment name (default: dev-project): ").strip() or "dev-project"
+        info['STAGING_ENV'] = input("Staging environment name (default: staging-project): ").strip() or "staging-project"
+        info['PROD_ENV'] = input("Production environment name (default: prod-project): ").strip() or "prod-project"
+        
+        # Directory structure
+        info['FRONTEND_DIR'] = input("Frontend directory (default: src): ").strip() or "src"
+        info['BACKEND_DIR'] = input("Backend directory (default: api): ").strip() or "api"
+        
+        # File extensions
+        if info['FRONTEND_FRAMEWORK'] == 'react':
+            info['FILE_EXT'] = 'tsx'
+        elif info['FRONTEND_FRAMEWORK'] == 'vue':
+            info['FILE_EXT'] = 'vue'
+        elif info['language'] == 'typescript':
+            info['FILE_EXT'] = 'ts'
+        else:
+            info['FILE_EXT'] = 'js'
+        
+        # Workflow naming
+        info['WORKFLOW_NAME'] = f"{info['DOMAIN']}-workflow" if info['DOMAIN'] != 'general' else "user-workflow"
         
         # Development workflow
         print("\n🔄 Development Workflow")
@@ -115,6 +168,31 @@ class KiroInitializer:
             else:
                 print("Please enter 'y' or 'n'.")
     
+    def _substitute_template_variables(self, content: str) -> str:
+        """Replace template variables in content with actual values"""
+        for var_name, value in self.project_info.items():
+            if isinstance(value, str):
+                content = content.replace(f"{{{{{var_name}}}}}", value)
+        return content
+    
+    def _process_template_file(self, source_path: Path, dest_path: Path):
+        """Process a template file by substituting variables"""
+        if source_path.suffix in ['.json', '.md', '.ts', '.js', '.py', '.sh']:
+            with open(source_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            # Substitute template variables
+            content = self._substitute_template_variables(content)
+            
+            # Write processed content
+            dest_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(dest_path, 'w', encoding='utf-8') as f:
+                f.write(content)
+        else:
+            # Copy binary files as-is
+            dest_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source_path, dest_path)
+    
     def update_steering_documents(self):
         """Update steering documents with project-specific information"""
         print("\n📝 Updating steering documents...")
@@ -146,7 +224,40 @@ class KiroInitializer:
 **IMPORTANT:** Always check `docs/projectStatus.md` for the current state of all components, testing status, and known issues before starting any development work.
 
 ## Product Purpose
-{self.project_info['project_description']}
+{self.project_info['PROJECT_DESCRIPTION']}
+
+## Project Details
+- **Name**: {self.project_info['PROJECT_NAME']}
+- **Type**: {self.project_info['PROJECT_TYPE']}
+- **Domain**: {self.project_info['DOMAIN']}
+- **Tech Stack**: {self.project_info['TECH_STACK']}
+
+## Core Features
+- {self.project_info['RESOURCE_NAME'].title()} management and CRUD operations
+- User workflow optimization
+- {self.project_info['AUTH_PROVIDER'].title()} authentication (if enabled)
+- {self.project_info['DATABASE'].title()} data persistence
+
+## Architecture Overview
+- **Frontend**: {self.project_info['FRONTEND_FRAMEWORK'].title()}
+- **Backend**: {self.project_info['BACKEND_FRAMEWORK'].title()}
+- **Database**: {self.project_info['DATABASE'].title()}
+- **Deployment**: {self.project_info['DEPLOYMENT_PLATFORM'].title()}
+
+## Development Workflow
+1. Use project-specific agents for focused development
+2. Follow established patterns and conventions
+3. Test in development environment first
+4. Deploy through proper CI/CD pipeline
+
+## Key Resources
+- Primary entity: {self.project_info['RESOURCE_NAME']}
+- Workflow: {self.project_info['WORKFLOW_NAME']}
+- Main directory: {self.project_info['FRONTEND_DIR']}/
+"""
+        
+        with open('.kiro/steering/product.md', 'w') as f:
+            f.write(content)
 
 **Core Differentiator:** [Define what makes your {self.project_info['project_type']} unique]
 
@@ -443,6 +554,16 @@ This checklist ensures every new session starts with full context of the project
         # Always include core agents
         self._create_core_agents()
         
+        # Create project-specific agents based on requirements
+        if self.project_info['needs_database_crud']:
+            self._create_resource_management_agent()
+        
+        # Create user workflow agent
+        self._create_user_workflow_agent()
+        
+        # Create backend services agent
+        self._create_backend_services_agent()
+        
         # Conditional agents based on project needs
         if self.project_info['needs_api_testing']:
             self._update_api_testing_agent()
@@ -454,57 +575,70 @@ This checklist ensures every new session starts with full context of the project
         else:
             self._remove_agent("calendar-integration.json")
         
-        if self.project_info['needs_database_crud']:
-            self._update_crud_agent()
-        else:
-            self._remove_agent("crud-pattern.json")
+        # Remove old template-specific agents
+        self._cleanup_unused_agents()
         
         # Update agent README
         self._update_agent_readme()
     
     def _create_core_agents(self):
-        """Create core agents that every project needs"""
+        """Create essential agents for all projects"""
+        # Copy all agents first, then customize
+        agents_dir = Path('.kiro/agents')
+        agents_dir.mkdir(parents=True, exist_ok=True)
         
-        # Code refactor agent
-        refactor_agent = {
-            "name": "code-refactor",
-            "description": f"Specialized agent for refactoring {self.project_info['language']} code with focus on maintainability and performance",
-            "prompt": f"You are a code refactoring specialist for {self.project_info['language']} projects. Focus on improving code quality, maintainability, and performance while preserving functionality.",
-            "tools": ["read", "write", "grep", "glob"],
-            "allowedTools": ["read", "write", "grep", "glob"],
-            "resources": [
-                "file://src/**/*",
-                "file://.kiro/steering/tech.md",
-                "file://.kiro/steering/structure.md"
-            ]
-        }
+        # Copy all agent files from template and process them
+        template_agents_dir = self.template_dir / 'agents'
+        if template_agents_dir.exists():
+            for agent_file in template_agents_dir.glob('*.json'):
+                dest_path = agents_dir / agent_file.name
+                self._process_template_file(agent_file, dest_path)
+    
+    def _create_resource_management_agent(self):
+        """Create resource management agent from template"""
+        source_path = self.template_dir / 'agents' / 'resource-management.json'
+        dest_path = Path('.kiro/agents') / f"{self.project_info['RESOURCE_NAME']}-management.json"
         
-        with open(self.template_dir / "agents" / "code-refactor.json", "w") as f:
-            json.dump(refactor_agent, f, indent=2)
+        if source_path.exists():
+            self._process_template_file(source_path, dest_path)
+            print(f"  Created {self.project_info['RESOURCE_NAME']}-management agent")
+    
+    def _create_user_workflow_agent(self):
+        """Create user workflow agent from template"""
+        source_path = self.template_dir / 'agents' / 'user-workflow.json'
+        dest_path = Path('.kiro/agents') / f"{self.project_info['WORKFLOW_NAME']}.json"
         
-        # Self-improve agent (keep as-is, it's generic)
-        # Project status agent
-        status_agent_md = f"""# Project Status Agent
-
-## Purpose
-Maintains and updates project status documentation for {self.project_info['project_name']}.
-
-## Usage
-```bash
-kiro-cli --agent projectStatus
-> Update project status with latest developments
-> Generate status report for stakeholders
-```
-
-## Responsibilities
-- Track feature development progress
-- Document completed work
-- Identify blockers and next steps
-- Maintain project timeline
-"""
+        if source_path.exists():
+            self._process_template_file(source_path, dest_path)
+            print(f"  Created {self.project_info['WORKFLOW_NAME']} agent")
+    
+    def _create_backend_services_agent(self):
+        """Create backend services agent from template"""
+        source_path = self.template_dir / 'agents' / 'backend-services.json'
+        dest_path = Path('.kiro/agents') / 'backend-services.json'
         
-        with open(self.template_dir / "agents" / "projectStatus.md", "w") as f:
-            f.write(status_agent_md)
+        if source_path.exists():
+            self._process_template_file(source_path, dest_path)
+            print(f"  Created backend-services agent for {self.project_info['BACKEND_FRAMEWORK']}")
+    
+    def _cleanup_unused_agents(self):
+        """Remove agents that aren't needed for this project"""
+        agents_to_remove = [
+            # Old template-specific agents are removed during cleanup
+        ]
+        
+        # Remove optional agents based on project needs
+        if not self.project_info['needs_auth']:
+            agents_to_remove.append('auth-troubleshoot.json')
+        
+        if not self.project_info['needs_database_crud']:
+            agents_to_remove.append('crud-pattern.json')
+        
+        for agent_file in agents_to_remove:
+            agent_path = Path('.kiro/agents') / agent_file
+            if agent_path.exists():
+                agent_path.unlink()
+                print(f"  Removed unused agent: {agent_file}")
     
     def _update_api_testing_agent(self):
         """Update API testing agent for project-specific needs"""

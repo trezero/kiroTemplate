@@ -1,0 +1,17 @@
+# Template Validation Configuration
+# Add project-specific terms that should not appear in templates
+# One pattern per line, supports basic regex
+
+# Example project-specific terms to detect:
+# MyCompanyName
+# my-specific-project
+# hardcoded-database-id
+# specific-domain.com
+
+# Uncomment patterns below if you need to detect them:
+# RecipeRaiders
+# recipe-management
+# cooking-workflow
+# demo-project
+# studio-8456264137
+# reciperaiders

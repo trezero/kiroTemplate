@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Modern Kiro CLI Template Installation Script
-# Based on Recipe Raiders optimized architecture
+# Based on universal template architecture
 # Usage: ./install-kiro-template.sh [target_directory]
 
 set -e
@@ -35,7 +35,7 @@ install_template() {
     local target_dir=${1:-.}
     local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     
-    print_status "Installing modern Kiro CLI template with Recipe Raiders architecture..."
+    print_status "Installing modern Kiro CLI template with universal architecture..."
     print_status "Script directory: $script_dir"
     print_status "Target directory: $target_dir"
     

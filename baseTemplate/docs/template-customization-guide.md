@@ -1,46 +1,75 @@
-# Template Agent Customization Guide
+# Template Customization Guide
 
-## Base Agent Templates
+## Overview
 
-All templates start with the 22 optimized agents from Recipe Raiders, then customize based on project type:
+All templates start with the 22+ optimized agents from the universal template system, then customize based on project type:
 
 ### Web App Template Customizations
-- `recipe-management.json` → `component-management.json` (React/Vue component CRUD)
-- `cooking-workflow.json` → `user-workflow.json` (User journey and interaction flows)
-- `ai-integration.json` → `api-integration.json` (External API integration)
-- `firebase.json` → `deployment.json` (Vercel/Netlify/AWS deployment)
+- `resource-management.json` → `component-management.json` (React/Vue component CRUD)
+- `user-workflow.json` → `user-workflow.json` (User journey and interaction flows)
+- `backend-services.json` → `deployment.json` (Vercel/Netlify/AWS deployment)
 
-### API Service Template Customizations  
-- `recipe-management.json` → `endpoint-management.json` (API endpoint CRUD)
-- `cooking-workflow.json` → `request-workflow.json` (Request/response handling)
-- `firebase.json` → `database-management.json` (Database operations)
-- `frontend.json` → `api-documentation.json` (API docs and testing)
+### API Service Template Customizations
+- `resource-management.json` → `endpoint-management.json` (API endpoint CRUD)
+- `user-workflow.json` → `request-workflow.json` (Request/response handling)
+- `backend-services.json` → `database-management.json` (Database operations)
 
 ### Mobile App Template Customizations
-- `recipe-management.json` → `screen-management.json` (Mobile screen CRUD)
-- `cooking-workflow.json` → `navigation-workflow.json` (App navigation flows)
-- `firebase.json` → `native-integration.json` (Native platform features)
-- `frontend.json` → `mobile-ui.json` (Mobile-specific UI patterns)
+- `resource-management.json` → `screen-management.json` (Mobile screen CRUD)
+- `user-workflow.json` → `navigation-workflow.json` (App navigation flows)
+- `backend-services.json` → `native-integration.json` (Native platform features)
 
-## Variable Substitution
+## Template Variables
 
-Agents use template variables for customization:
+The system uses these template variables for dynamic customization:
+
 - `{{PROJECT_NAME}}` - Project name
 - `{{TECH_STACK}}` - Primary technology (React, Express, Flutter, etc.)
 - `{{PROJECT_TYPE}}` - web-app, api-service, mobile-app, etc.
 - `{{DEPLOYMENT_PLATFORM}}` - Vercel, AWS, Google Cloud, etc.
 
-## Resource Path Templates
+## Resource Path Adaptation
 
-Resources adapt to project structure:
-- `file://src/{{FRONTEND_DIR}}/**/*.tsx` 
-- `file://{{API_DIR}}/**/*.ts`
-- `file://{{CONFIG_DIR}}/**/*.json`
+Templates automatically adapt resource paths based on project structure:
 
-## Conditional Agent Inclusion
+- `file://{{FRONTEND_DIR}}/**/*.{{FILE_EXT}}`
+- `file://{{BACKEND_DIR}}/**/*.{{FILE_EXT}}`
+- `file://config/**/*.json`
 
-Based on project analysis:
-- **Has authentication?** → Include auth-troubleshoot.json
-- **Has database?** → Include db-query.json  
-- **Has calendar features?** → Include calendar-integration.json
-- **Has testing setup?** → Include api-testing.json, end-to-end-testing.json
+## Agent Customization Process
+
+1. **Base Template**: Start with universal agents
+2. **Variable Substitution**: Replace template variables with project values
+3. **Agent Specialization**: Transform generic agents to domain-specific ones
+4. **Resource Mapping**: Update file paths and resource references
+5. **Conditional Inclusion**: Add/remove agents based on project needs
+
+## Creating Custom Templates
+
+Use the template creation script:
+
+```bash
+./scripts/create-template.sh <template-name> [base-template]
+```
+
+Available template types:
+- `api-service` - REST API backend
+- `mobile-app` - React Native/Flutter
+- `desktop-app` - Electron/Tauri
+- `data-pipeline` - ETL/data processing
+- `library` - Reusable library/package
+
+## Template Validation
+
+Validate templates with:
+
+```bash
+./scripts/validate-template.sh
+```
+
+This checks for:
+- Required directory structure
+- Valid JSON syntax
+- Template variable usage
+- Hardcoded references
+- Agent completeness
