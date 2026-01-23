@@ -1,0 +1,8 @@
+{
+  "name": "library",
+  "description": "Kiro CLI template for library projects",
+  "type": "library",
+  "baseTemplate": "baseTemplate",
+  "created": "2026-01-23T00:11:50Z",
+  "version": "1.0.0"
+}

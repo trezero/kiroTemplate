@@ -16,7 +16,22 @@ rm -rf temp
 ## Customizations
 
 This template includes:
-- TODO: Document template-specific features
-- TODO: List specialized agents
-- TODO: Mention specific MCP servers
+- **Essential agents only** - Core development functionality without bloat
+- **Lightweight setup** - Minimal MCP server configuration
+- **Universal compatibility** - Works with any programming language or framework
+- **Self-improvement** - Built-in optimization and learning capabilities
+- **MCP Servers** - Context7 only for essential context management
+
+## Specialized Agents
+
+- `frontend` - Basic UI/component development tasks
+- `backend` - Core server-side and API development
+- `self-improve` - Template optimization and learning from usage patterns
+
+## Technology Support
+
+- **Languages:** Any (JavaScript, Python, Go, Rust, Java, etc.)
+- **Frameworks:** Minimal assumptions - adapts to your stack
+- **Use Cases:** CLI tools, libraries, simple scripts, prototypes
+- **Deployment:** Flexible - no specific platform assumptions
 

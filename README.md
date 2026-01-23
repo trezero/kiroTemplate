@@ -316,7 +316,10 @@ kiroTemplate/
 ├── templates/             # Specialized template variants
 │   ├── api-service/       # REST API backend
 │   ├── mobile-app/        # React Native/Flutter
+│   ├── desktop-app/       # Electron/Tauri desktop
 │   ├── data-pipeline/     # ETL/data processing
+│   ├── web-app/           # Frontend web applications
+│   ├── library/           # Reusable library/package
 │   └── minimal/           # Lightweight template
 ├── scripts/               # Template management scripts
 ├── .template-validation   # Configurable validation patterns

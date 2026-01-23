@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "node",
+      "args": [".kiro/mcp-servers/chrome-devtools-mcp/build/src/index.js"],
+      "env": {}
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["@upstash/context7-mcp"],
+      "env": {}
+    },
+    "archon": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "http://localhost:8051/mcp",
+        "--allow-http"
+      ]
+    }
+  }
+}

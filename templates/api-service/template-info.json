@@ -1,0 +1,8 @@
+{
+  "name": "api-service",
+  "description": "Kiro CLI template for api-service projects",
+  "type": "api-service",
+  "baseTemplate": "baseTemplate",
+  "created": "2026-01-23T00:11:42Z",
+  "version": "1.0.0"
+}

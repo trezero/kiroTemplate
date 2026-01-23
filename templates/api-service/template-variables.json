@@ -1,0 +1,104 @@
+{
+  "variables": {
+    "PROJECT_NAME": {
+      "description": "Project name",
+      "default": "MyProject",
+      "examples": ["TaskManager", "BlogApp", "ShopApp"]
+    },
+    "PROJECT_DESCRIPTION": {
+      "description": "Brief project description",
+      "default": "A modern web application",
+      "examples": ["Task management system", "Personal blog", "E-commerce platform"]
+    },
+    "PROJECT_TYPE": {
+      "description": "Type of project",
+      "default": "web-app",
+      "options": ["web-app", "api-service", "mobile-app", "desktop-app", "library", "data-pipeline"]
+    },
+    "DOMAIN": {
+      "description": "Business domain/industry",
+      "default": "general",
+      "examples": ["productivity", "ecommerce", "healthcare", "education", "finance"]
+    },
+    "TECH_STACK": {
+      "description": "Primary technology stack",
+      "default": "React",
+      "examples": ["React", "Vue", "Angular", "Express", "FastAPI", "Flutter"]
+    },
+    "FRONTEND_FRAMEWORK": {
+      "description": "Frontend framework",
+      "default": "react",
+      "options": ["react", "vue", "angular", "svelte", "vanilla-js", "none"]
+    },
+    "BACKEND_FRAMEWORK": {
+      "description": "Backend framework",
+      "default": "express",
+      "options": ["express", "fastapi", "django", "flask", "spring-boot", "rails", "none"]
+    },
+    "DATABASE": {
+      "description": "Database system",
+      "default": "postgresql",
+      "options": ["postgresql", "mysql", "mongodb", "sqlite", "redis", "firestore", "none"]
+    },
+    "DEPLOYMENT_PLATFORM": {
+      "description": "Deployment platform",
+      "default": "vercel",
+      "options": ["aws", "gcp", "azure", "vercel", "netlify", "railway", "docker", "none"]
+    },
+    "AUTH_PROVIDER": {
+      "description": "Authentication provider",
+      "default": "firebase",
+      "options": ["firebase", "auth0", "supabase", "custom", "none"]
+    },
+    "AI_PROVIDER": {
+      "description": "AI service provider",
+      "default": "openai",
+      "options": ["openai", "anthropic", "google-gemini", "ollama", "none"]
+    },
+    "RESOURCE_NAME": {
+      "description": "Primary resource/entity name",
+      "default": "item",
+      "examples": ["task", "post", "user", "product", "order"]
+    },
+    "RESOURCE_NAME_PLURAL": {
+      "description": "Plural form of resource name",
+      "default": "items",
+      "examples": ["tasks", "posts", "users", "products", "orders"]
+    },
+    "WORKFLOW_NAME": {
+      "description": "Primary workflow/process name",
+      "default": "user-workflow",
+      "examples": ["task-workflow", "publishing-workflow", "order-workflow"]
+    },
+    "DEV_ENV": {
+      "description": "Development environment identifier",
+      "default": "dev-project",
+      "examples": ["demo-project", "dev-env", "local-dev"]
+    },
+    "STAGING_ENV": {
+      "description": "Staging environment identifier",
+      "default": "staging-project",
+      "examples": ["staging-env", "test-project", "pre-prod"]
+    },
+    "PROD_ENV": {
+      "description": "Production environment identifier",
+      "default": "prod-project",
+      "examples": ["production-env", "live-project", "prod"]
+    },
+    "FRONTEND_DIR": {
+      "description": "Frontend source directory",
+      "default": "src",
+      "examples": ["src", "client", "frontend", "web"]
+    },
+    "BACKEND_DIR": {
+      "description": "Backend source directory",
+      "default": "api",
+      "examples": ["api", "server", "backend", "functions"]
+    },
+    "FILE_EXT": {
+      "description": "Primary file extension",
+      "default": "tsx",
+      "examples": ["tsx", "jsx", "vue", "ts", "js", "py"]
+    }
+  }
+}

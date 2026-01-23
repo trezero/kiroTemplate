@@ -1,0 +1,8 @@
+{
+  "name": "desktop-app",
+  "description": "Kiro CLI template for desktop-app projects",
+  "type": "desktop-app",
+  "baseTemplate": "baseTemplate",
+  "created": "2026-01-23T00:11:47Z",
+  "version": "1.0.0"
+}

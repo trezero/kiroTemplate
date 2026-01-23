@@ -1,0 +1,8 @@
+{
+  "name": "mobile-app",
+  "description": "Kiro CLI template for mobile-app projects",
+  "type": "mobile-app",
+  "baseTemplate": "baseTemplate",
+  "created": "2026-01-23T00:11:45Z",
+  "version": "1.0.0"
+}
