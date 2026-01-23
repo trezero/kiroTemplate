@@ -5,10 +5,8 @@
   "tools": ["read", "write", "shell"],
   "allowedTools": ["read", "write", "shell"],
   "resources": [
-    "file://README.md",
-    "file://package.json",
-    "file://.kiro/**/*",
-    "file://src/**/*"
+    "file://**/*",
+    "file://.kiro/**/*"
   ],
   "model": "claude-sonnet-4"
 }
