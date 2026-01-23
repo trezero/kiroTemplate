@@ -67,9 +67,9 @@ install_template() {
     print_success "Template installed successfully!"
     print_status "Next steps:"
     echo "  1. cd $target_dir"
-    echo "  2. kiro-cli --agent project-detector  # Analyze your project"
-    echo "  3. kiro-cli --agent template-manager  # Customize for your needs"
-    echo "  4. kiro-cli  # Start developing!"
+    echo "  2. kiro-cli --agent kiro-setup  # Set up your project"
+    echo "     Then type: Set up this project"
+    echo "  3. kiro-cli  # Start developing!"
 }
 
 # Run installation

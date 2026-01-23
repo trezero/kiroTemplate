@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Modern Kiro CLI Template Installation Script
-# Based on {{PROJECT_NAME}} optimized architecture
+# Based on universal template architecture
 # Usage: ./install-kiro-template.sh [target_directory]
 
 set -e
@@ -35,7 +35,7 @@ install_template() {
     local target_dir=${1:-.}
     local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     
-    print_status "Installing modern Kiro CLI template with {{PROJECT_NAME}} architecture..."
+    print_status "Installing modern Kiro CLI template with universal architecture..."
     print_status "Script directory: $script_dir"
     print_status "Target directory: $target_dir"
     
@@ -67,9 +67,9 @@ install_template() {
     print_success "Template installed successfully!"
     print_status "Next steps:"
     echo "  1. cd $target_dir"
-    echo "  2. kiro-cli --agent project-detector  # Analyze your project"
-    echo "  3. kiro-cli --agent template-manager  # Customize for your needs"
-    echo "  4. kiro-cli  # Start developing!"
+    echo "  2. kiro-cli --agent kiro-setup  # Set up your project"
+    echo "     Then type: Set up this project"
+    echo "  3. kiro-cli  # Start developing!"
 }
 
 # Run installation
