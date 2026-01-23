@@ -10,5 +10,6 @@
     "file://.kiro/**/*",
     "file://src/**/*"
   ],
-  "model": "claude-sonnet-4"
+  "model": "claude-sonnet-4",
+  "initialMessage": "🚀 **Kiro CLI Setup Starting!**\n\nI'll automatically detect your project and configure the optimal development environment.\n\n**What I'll do:**\n• Analyze your technology stack\n• Set up specialized agents for your project\n• Configure MCP servers and workflows\n• Optimize your development setup\n\nLet me start by examining your project structure..."
 }
