@@ -4,12 +4,30 @@ This repository provides modern Kiro CLI templates for any project type, featuri
 
 ## 🚀 Quick Start
 
+### Option 1: Smart Installation (Recommended)
 ```bash
 # 1. Navigate to your project directory
 cd /path/to/your/project
 
-# 2. Install template (creates .kiro/ directory in current location)
-/path/to/kiroTemplate/baseTemplate/install-kiro-template.sh
+# 2. Install template detector (lightweight - just one agent)
+/path/to/kiroTemplate/install-detector.sh
+
+# 3. Auto-detect and install optimal template
+kiro-cli --agent template-installer
+# When prompted, type: "Install the best template for my project"
+
+# 4. Follow the automated setup workflow
+# The agent will guide you through the remaining steps
+```
+
+### Option 2: Manual Template Selection
+```bash
+# 1. Navigate to your project directory
+cd /path/to/your/project
+
+# 2. Choose and install specific template
+/path/to/kiroTemplate/templates/api-service/install-kiro-template.sh
+# or /path/to/kiroTemplate/baseTemplate/install-kiro-template.sh
 
 # 3. Initialize and configure everything automatically
 kiro-cli --agent kiro-setup
@@ -381,6 +399,7 @@ kiro-cli --agent project-detector
 ## 📋 Essential Agent Prompts
 
 ### Core Setup Agents
+- **`template-installer`**: *"Install the best template for my project"*
 - **`kiro-setup`**: *"Set up my development environment"*
 - **`project-detector`**: *"Analyze my project"*
 - **`template-manager`**: *"Implement my project-detector recommendations"*
