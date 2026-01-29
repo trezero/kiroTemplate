@@ -1,6 +1,6 @@
 # Kiro CLI Project Templates - Universal Template System
 
-This repository provides modern Kiro CLI templates for any project type, featuring 22+ standardized agents, hybrid documentation structure, and intelligent project-specific customization.
+This repository provides modern Kiro CLI templates for any project type, featuring streamlined universal agents, automated browser testing, and intelligent project-specific customization.
 
 ## 🚀 Quick Start
 
@@ -11,11 +11,23 @@ cd /path/to/your/project
 # 2. Install template (creates .kiro/ directory in current location)
 /path/to/kiroTemplate/baseTemplate/install-kiro-template.sh
 
-# 3. Analyze and customize for your project
-kiro-cli --agent project-detector
-kiro-cli --agent template-manager
+# 3. Initialize and configure everything automatically
+kiro-cli --agent kiro-setup
+# When prompted, type: "Set up my development environment"
 
-# 4. Start developing
+# 4. Analyze your project for optimal configuration
+kiro-cli --agent project-detector
+# When prompted, type: "Analyze my project"
+
+# 5. Implement recommended customizations
+kiro-cli --agent template-manager
+# When prompted, type: "Implement my project-detector recommendations"
+
+# 6. Start developing with automated testing
+kiro-cli --agent automated-browser-testing
+# When prompted, type: "Test my web application"
+
+# 7. Begin regular development
 kiro-cli
 ```
 
@@ -23,16 +35,19 @@ kiro-cli
 
 ## ✨ What's New (Universal Template Architecture)
 
-### 🤖 22+ Optimized Agents
-- **All JSON format** - Standardized, fast-loading agents
-- **Under 3,000 characters** - Focused prompts with detailed docs
-- **Hybrid architecture** - Core expertise + reference documentation
-- **Project-specific customization** - Adapts to any technology stack
+### 🤖 Streamlined Base Template
+- **13 essential agents** - Only universally beneficial agents included
+- **Universal compatibility** - Works with any programming language or framework
+- **Automated browser testing** - Built-in web application testing with screenshot evidence
+- **Intelligent setup** - Auto-configures everything after template deployment
+- **Easy customization** - Add project-specific agents as needed via template-manager
+- **Under 2,000 characters per agent** - Focused prompts with clear purposes
+- **Hybrid architecture** - Core functionality + detailed reference documentation
 
 ### 📚 Modern Structure
 ```
 .kiro/
-├── agents/          # 22+ optimized JSON agents
+├── agents/          # 13 streamlined universal agents
 ├── steering/        # Project knowledge base
 ├── docs/           # Detailed reference guides
 ├── prompts/        # Reusable prompt templates
@@ -42,37 +57,102 @@ kiro-cli
 ```
 
 ### 🎯 Smart Customization
-- **Auto-detection** - Analyzes your project automatically
-- **Technology-aware** - Customizes agents for your stack
-- **Template variables** - Dynamic agent generation
-- **Conditional inclusion** - Only relevant agents included
+- **Auto-detection** - project-detector analyzes your project automatically
+- **Intelligent setup** - kiro-setup configures everything including browser testing
+- **Template manager** - Adds project-specific agents and configurations
+- **Technology-aware** - Adapts to any language or framework
+- **Conditional inclusion** - Only relevant agents added when needed
+
+## 🔧 Complete Setup Workflow
+
+### Step-by-Step Template Deployment
+
+1. **Install Template**
+   ```bash
+   cd /path/to/your/project
+   /path/to/kiroTemplate/baseTemplate/install-kiro-template.sh
+   ```
+
+2. **Initialize Environment**
+   ```bash
+   kiro-cli --agent kiro-setup
+   ```
+   **Prompt**: `"Set up my development environment"`
+   - Detects technology stack
+   - Configures MCP servers
+   - Sets up browser testing
+   - Validates all components
+
+3. **Analyze Project**
+   ```bash
+   kiro-cli --agent project-detector
+   ```
+   **Prompt**: `"Analyze my project"`
+   - Identifies project type
+   - Recommends specific agents
+   - Suggests configurations
+
+4. **Apply Customizations**
+   ```bash
+   kiro-cli --agent template-manager
+   ```
+   **Prompt**: `"Implement my project-detector recommendations"`
+   - Adds recommended agents
+   - Configures project-specific tools
+   - Optimizes setup
+
+5. **Test Setup**
+   ```bash
+   kiro-cli --agent automated-browser-testing
+   ```
+   **Prompt**: `"Test my web application"`
+   - Validates browser automation
+   - Creates testing evidence
+   - Confirms everything works
+
+6. **Start Development**
+   ```bash
+   kiro-cli
+   ```
+   - Use any agent for development tasks
+   - All agents now optimized for your project
 
 ## 📋 Available Templates
 
 ### 🌐 Web App Template
 **Perfect for:** React, Vue, Angular, Svelte applications
-**Includes:** component-management, user-workflow, api-integration, deployment
-**MCP Servers:** Vercel Agent-Browser, Context7, Deployment tools
+**Includes:** frontend-development, ui-components + 13 universal agents
+**Agent Count:** 15 agents
 
 ### 🔌 API Service Template  
 **Perfect for:** Express, FastAPI, Django, Spring Boot APIs
-**Includes:** endpoint-management, request-workflow, database-management, api-documentation
-**MCP Servers:** Context7, Database tools, Vercel Agent-Browser
+**Includes:** api-development, database-management + 13 universal agents
+**Agent Count:** 15 agents
 
 ### 📱 Mobile App Template
 **Perfect for:** React Native, Flutter, Ionic applications
-**Includes:** screen-management, navigation-workflow, native-integration, mobile-ui
-**MCP Servers:** Context7, Vercel Agent-Browser, Mobile testing tools
+**Includes:** mobile-development + 13 universal agents
+**Agent Count:** 14 agents
 
 ### 💾 Data Pipeline Template
 **Perfect for:** ETL, data processing, analytics pipelines
-**Includes:** data-processing, pipeline-workflow, data-validation, monitoring
-**MCP Servers:** Context7, Database tools, Monitoring tools
+**Includes:** data-processing + 13 universal agents
+**Agent Count:** 14 agents
+
+### 🖥️ Desktop App Template
+**Perfect for:** Electron, Tauri, native desktop applications
+**Includes:** desktop-development + 13 universal agents
+**Agent Count:** 14 agents
+
+### 📦 Library Template
+**Perfect for:** npm packages, Python libraries, Rust crates
+**Includes:** library-development + 13 universal agents
+**Agent Count:** 14 agents
 
 ### ⚡ Minimal Template
-**Perfect for:** Libraries, CLI tools, simple projects
-**Includes:** Essential agents only (frontend, backend, self-improve)
-**MCP Servers:** Context7 only
+**Perfect for:** Simple projects, quick prototypes
+**Includes:** 13 universal agents only
+**Agent Count:** 13 agents
 
 ## 🛠️ Technology Support
 
@@ -219,11 +299,25 @@ cd my-react-app
 # Install template
 /path/to/kiroTemplate/baseTemplate/install-kiro-template.sh
 
-# Auto-detect and customize
-kiro-cli --agent project-detector
+# Initialize and configure everything
+kiro-cli --agent kiro-setup
+# Prompt: "Set up my development environment"
 # Detects: React, TypeScript, Vite, Tailwind
-# Customizes: component-management, user-workflow, api-integration
-# Sets up: Vercel Agent-Browser, Context7, deployment integration
+# Sets up: Browser testing, development environment
+# Configures: All agents and MCP servers
+
+# Analyze project for customizations
+kiro-cli --agent project-detector
+# Prompt: "Analyze my project"
+# Output: Recommends frontend-development, ui-components agents
+
+# Apply recommendations
+kiro-cli --agent template-manager
+# Prompt: "Add React development agents"
+
+# Start automated testing
+kiro-cli --agent automated-browser-testing
+# Prompt: "Test my React application"
 ```
 
 ### Express API Service
@@ -234,11 +328,22 @@ cd my-api-service
 # Install API service template
 /path/to/kiroTemplate/templates/api-service/install-kiro-template.sh
 
-# Auto-detect and customize
-kiro-cli --agent project-detector
+# Initialize and configure everything
+kiro-cli --agent kiro-setup
+# Prompt: "Set up my development environment"
 # Detects: Express, TypeScript, PostgreSQL, Jest
-# Customizes: endpoint-management, database-management, api-testing
-# Sets up: Database MCP, API documentation tools
+# Sets up: API testing, database tools, browser automation
+# Configures: All development tools
+
+# Analyze and customize
+kiro-cli --agent project-detector
+# Prompt: "Analyze my project"
+# Output: Confirms API service setup, suggests database agents
+
+# Test API endpoints
+kiro-cli --agent automated-browser-testing
+# Prompt: "Test my API endpoints"
+```
 ```
 
 ### Data Processing Pipeline
@@ -258,28 +363,55 @@ kiro-cli --agent project-detector
 
 ## 🎯 Best Practices
 
-1. **Always run project-detector first** - Ensures optimal customization
-2. **Use template-manager for fine-tuning** - Adjust agents after detection
-3. **Leverage hybrid architecture** - Agents for action, docs for reference
-4. **Keep agents focused** - Let detailed guides handle complexity
-5. **Update regularly** - Use self-improve agent for continuous optimization
-6. **Validate templates** - Use validation scripts to ensure quality
-7. **Configure validation** - Add project-specific terms to `.template-validation`
+## 🎯 Best Practices
+
+1. **Always run kiro-setup first** - Ensures complete initialization including browser testing
+   - Prompt: **"Set up my development environment"**
+2. **Use project-detector for analysis** - Understands your specific project needs
+   - Prompt: **"Analyze my project"**
+3. **Use template-manager for customization** - Implements recommended agents
+   - Prompt: **"Implement my project-detector recommendations"** or **"Add [technology] agents"**
+4. **Leverage automated testing** - Test web applications with visual evidence
+   - Prompt: **"Test my web application"** or **"Test my API endpoints"**
+5. **Keep agents focused** - Let detailed guides handle complexity
+6. **Update regularly** - Use self-improve agent for continuous optimization
+   - Prompt: **"Optimize my Kiro CLI setup"**
+7. **Validate templates** - Use validation scripts to ensure quality
+
+## 📋 Essential Agent Prompts
+
+### Core Setup Agents
+- **`kiro-setup`**: *"Set up my development environment"*
+- **`project-detector`**: *"Analyze my project"*
+- **`template-manager`**: *"Implement my project-detector recommendations"*
+- **`automated-browser-testing`**: *"Test my web application"*
+
+### Development Agents
+- **`code-analysis`**: *"Analyze my code quality"*
+- **`code-refactor`**: *"Refactor this messy code"*
+- **`dependency-management`**: *"Update my dependencies"*
+- **`environment-setup`**: *"Configure my development environment"*
+
+### Project Management
+- **`project-status`**: *"Generate project status report"*
+- **`docs-navigator`**: *"Help me organize documentation"*
+- **`self-improve`**: *"Optimize my Kiro CLI setup"*
 
 ## 📈 Success Stories
 
 **Universal Template System:**
-- Reduced agent complexity by 84% (8,427 → 1,383 chars)
-- Standardized 22+ agents with consistent performance
+- Reduced agent count from 24+ to 13 essential agents
+- Standardized all agents with consistent JSON format
 - Implemented hybrid architecture for better maintainability
-- Achieved 100% JSON compliance and validation
-- Created configurable validation system
+- Achieved 100% universal compatibility across project types
+- Added automated browser testing with screenshot evidence
 
 **Template Benefits:**
 - Faster project setup (5 minutes vs. 30+ minutes)
 - Consistent development experience across projects
 - Reduced learning curve for new team members
 - Scalable architecture that grows with projects
+- Built-in testing capabilities with visual evidence
 - Zero hardcoded references - truly reusable
 - Configurable validation for quality assurance
 
@@ -291,9 +423,16 @@ kiro-cli --agent project-detector
 cd /path/to/your/project
 /path/to/kiroTemplate/baseTemplate/install-kiro-template.sh
 
+# Initialize and configure everything
+kiro-cli --agent kiro-setup
+# Prompt: "Set up my development environment"
+
 # Analyze and customize
 kiro-cli --agent project-detector
+# Prompt: "Analyze my project"
+
 kiro-cli --agent template-manager
+# Prompt: "Implement my project-detector recommendations"
 
 # Create custom template
 ./scripts/create-template.sh <type>
@@ -305,8 +444,9 @@ kiro-cli --agent template-manager
 ./scripts/test-template.sh
 
 # Daily workflow
-kiro-cli --agent component-management  # UI development
-kiro-cli --agent self-improve          # End-of-session optimization
+kiro-cli --agent automated-browser-testing  # "Test my web application"
+kiro-cli --agent code-analysis             # "Analyze my code quality"
+kiro-cli --agent self-improve              # "Optimize my Kiro CLI setup"
 ```
 
 ### Directory Structure

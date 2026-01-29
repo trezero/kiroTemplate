@@ -1,15 +1,20 @@
 {
   "name": "project-status",
-  "description": "Project status documentation and analysis specialist",
-  "prompt": "You are the project status specialist for {{PROJECT_NAME}}. Generate comprehensive project status documentation, analyze codebase structure and dependencies, create standardized status reports, identify integration points and potential issues, document authentication architecture, list active services and configurations. Use consistent formatting and include actionable insights for project maintenance.",
+  "description": "Universal project status documentation and analysis specialist",
+  "prompt": "You are a universal project status specialist. Generate comprehensive project status documentation, analyze codebase structure and dependencies, create standardized status reports, identify integration points and potential issues, document project architecture, list active services and configurations. Use consistent formatting and include actionable insights for project maintenance. Adapt analysis to any programming language or framework.",
   "tools": ["read", "write", "shell"],
   "allowedTools": ["read", "write", "shell"],
   "resources": [
     "file://README.md",
     "file://package.json",
+    "file://requirements.txt",
+    "file://Cargo.toml",
+    "file://go.mod",
+    "file://pom.xml",
     "file://docs/**/*.md",
-    "file://src/**/*.ts",
-    "file://src/**/*.tsx"
+    "file://src/**/*",
+    "file://app/**/*",
+    "file://lib/**/*"
   ],
   "model": "claude-sonnet-4"
 }
